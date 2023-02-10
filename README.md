@@ -1,2 +1,2 @@
-# Item_Crawler
-스마트스토어 크롤러
+# Amanzon_Crawler
+아마존 용 웹 크롤러
