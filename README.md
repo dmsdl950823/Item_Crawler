@@ -1,2 +1,3 @@
-# Amanzon_Crawler
-아마존 용 웹 크롤러
+# Item_Crawler
+
+도매꾹 아이템 크롤러
