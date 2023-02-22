@@ -5,8 +5,6 @@ const puppeteer = require('puppeteer')
 
 const fs = require('fs')
 const fastcsv = require('fast-csv')
-const readline = require('readline').createInterface({ input: process.stdin, output: process.stdout })
-
 
 // 시작 페이지 ✅
 let pageCount = 1
@@ -16,30 +14,6 @@ let failCnt = 0
 // [카테고리 설정] ✅
 const category = catetories['Pet Supplies']
 const search_input = 'pet'
-
-
-const question = request => {
-  return new Promise((resolve, reject) => {
-    readline.question(request, answer => {
-      userInfo.push(answer)
-      resolve()
-    })
-  })
-}
-
-const userInfo = []
-
-const main = async () => {
-  await question('@@ 사용자 이름', question)
-  await question('@@ 사용자 비밀번호', question)
-
-
-  forPuppeteerWithPage(pageCount)
-  readline.close()
-}
-
-main()
-
 
 
 /**
@@ -71,7 +45,6 @@ const saveWithCSV = (json, ws) => {
 }
 
 
-
 // 크롤러 (페이지만 입력하는 방식) ✅
 const forPuppeteerWithPage = async (innerpagecnt = 1) => {
   console.log(`${colors.bgBlue}     >>> Browser Start! <<<    `, colors.reset)
@@ -90,6 +63,7 @@ const forPuppeteerWithPage = async (innerpagecnt = 1) => {
     slowMo: 30,
   })
 
+
   try {
     const page = await browser.newPage() // 크롬 브라우저의 탭 하나 생성
     // await page.setDefaultNavigationTimeout(0)
@@ -106,18 +80,15 @@ const forPuppeteerWithPage = async (innerpagecnt = 1) => {
     await page.click('#snsLinks #lSnsLinkNaver')
 
 
-    // [네이버] 로그인 화면 이동
     await page.waitForSelector('.id_pw_wrap')
-    const inputs = await page.$$('.id_pw_wrap .input_row .input_text')
+    const inputs = await page.$$('.id_pw_wrap > .input_row')
 
     for (let i = 0; i < inputs.length; i++) {
-      const input = inputs[i]
+      const input = array[i]
       // 아이디 / 비밀번호 입력하기
-      await input.type(userInfo[i])
+      await input.type('input_text', 'dmsdl950823')
     }
-
-    await page.click('.btn_login')
-
+    console.log('일단 들어왔어')
     // await page.type('.id_pw_wrap > .input_text', 'dmsdl950823')
     
     const test = 1
@@ -363,6 +334,7 @@ const forPuppeteerWithPage = async (innerpagecnt = 1) => {
   // await page.screenshot({ path: screenshot })
 }
 
+forPuppeteerWithPage(pageCount)
 
 
 // ================
