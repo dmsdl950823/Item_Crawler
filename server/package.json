@@ -1,11 +1,13 @@
 {
   "name": "amazon_crawler",
   "version": "1.0.0",
-  "description": "아마존 크롤러",
+  "description": "크롤러",
   "main": "index.js",
   "scripts": {
     "server": "node index.js",
-    "start": "node craweler.js",
+    "amazon": "node craweler_raw.js",
+    "store": "node craweler.js",
+    "cafe": "node cafe_craweler.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
